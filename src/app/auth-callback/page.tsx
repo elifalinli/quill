@@ -1,0 +1,15 @@
+'use client'
+
+import { useRouter, useSearchParams } from "next/navigation"
+
+
+const Page = () => {
+  const router = useRouter()
+
+  const searchParams = useSearchParams()
+  const origin = searchParams.get('origin');
+
+  //tRPC 1.42.59//
+}
+
+export default Page
