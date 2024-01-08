@@ -5,6 +5,7 @@ import ChatInput from "./ChatInput"
 import Messages from "./Messages"
 import { ChevronLeft, Link, Loader2, XCircle } from "lucide-react"
 import { buttonVariants } from "../ui/button"
+import { ChatContextProvider } from "./ChatContext"
 
 interface ChatWrapperProps {
   fileId: string
@@ -19,6 +20,7 @@ const {data, isLoading} = trpc.getFileUploadStatus.useQuery(
     data?.status === "SUCCESS" ||  data?.status === "FAILED" ? false : 500
 }
 )
+
 
 if(isLoading)
  return (
@@ -66,14 +68,16 @@ if(isLoading)
     <ChatInput isDisabled/>
   </div>
   )
-  if(data?.status === 'SUCCESS' )
+ 
   return (
+    <ChatContextProvider fileId={fileId}>
     <div className="relative min-h-full bg-zinc-50 flex divide-y divide-zinc-200 flex-col justify-between gap-2">
      <div className="flex-1 justify-between flex flex-col mb-28">
       <Messages/>
      </div>
      <ChatInput/>
     </div>
+    </ChatContextProvider>
   )
 }
 
